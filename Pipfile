@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pytest = "==6.1.1"
-appium-python-client = "==1.0.2"
+pytest = "*"
+appium-python-client = "*"
 pre-commit = "*"
 flake8 = "*"
 mypy = "*"
