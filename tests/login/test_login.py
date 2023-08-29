@@ -7,6 +7,7 @@ from logging_settings import logging
 from tests.login.conftest import (invalid_email, invalid_email_right_template,
                                   invalid_password, valid_email,
                                   valid_password)
+from tests.scripts import assert_elements_displayed, find_elements_by_ids
 
 
 def test_user_login_positive_case(user_login_fixture: LoginPage):
@@ -19,13 +20,9 @@ def test_user_login_positive_case(user_login_fixture: LoginPage):
         login_page.enter_email(valid_email)
         login_page.enter_password(valid_password)
         login_page.click_login_button()
+        elements_ids = ["menuDrawer", "hubAdd"]
 
-        menu_element = login_page.find_element_by_id('menuDrawer')
-        add_hub_element = login_page.find_element_by_id('hubAdd')
-
-        if not all([menu_element.is_displayed(), add_hub_element.is_displayed()]):
-            logging.error("Login was not successful, dashboard element not found")
-            raise AssertionError("Login was not successful, dashboard element not found")
+        assert_elements_displayed(find_elements_by_ids(login_page, elements_ids))
 
         driver = login_page.driver
         driver.close_app()
